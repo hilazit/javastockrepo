@@ -10,6 +10,6 @@ public class Hila_NasdaqServlet extends HttpServlet {
 		int sum=(num1+num2)*num3;
 		String resultStr = new String("<h1> Result of (" +
 				 + num1 + "+" + num2 + ")*" + num3 + " = " + sum + "</h1>");
-		resp.getWriter().println(resultStr);
+		resp.getWriter().println(resultStr); //
 	}
 }
