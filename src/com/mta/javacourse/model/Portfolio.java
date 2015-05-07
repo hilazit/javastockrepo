@@ -7,10 +7,10 @@ public class Portfolio {
 	
 	private String title;
 	private Stock[] stocks;
-	private int portfolioSize = 0;
+	private int portfolioSize;
 	
 	public Portfolio() {
-		this.title = "protfolio";
+		this.title = "Portfolio#1";
 		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
 		this.portfolioSize = 0;
 		
@@ -20,23 +20,21 @@ public class Portfolio {
 	 * @param portfolioToCopy
 	 */
 	
-	public Portfolio (Portfolio portfolioToCopy){
-		
-		this.setTitle(portfolioToCopy.getTitle());
-		this.setPortfolioSize(portfolioToCopy.getPortfolioSize());
-		
-		for (int i= 0; i<this.portfolioSize; i++ )	
+	public Portfolio (Portfolio portfolioToCopy){		
+		this();
+		for (int i= 0; i< portfolioToCopy.getPortfolioSize(); i++)
 		{
-			Stock temp = new Stock (portfolioToCopy.getStock()[i]);
-			this.addStock (temp);
+			Stock temp = new Stock(portfolioToCopy.getStock()[i]);
+			this.addStock(temp);
 			
 		}
+		
+		this.setTitle(portfolioToCopy.getTitle());
 	}	
 		
-	
 	public void addStock (Stock stocks){
 		if(stocks != null && portfolioSize < MAX_PORTFOLIO_SIZE) {
-			this.stocks[portfolioSize] = stocks;
+			this.stocks[this.portfolioSize] = stocks;
 			portfolioSize++;
 		}else {
 			System.out.println("Sorry, the protfolio is full, or the stock is null!");
