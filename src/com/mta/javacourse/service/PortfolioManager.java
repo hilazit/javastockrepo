@@ -1,7 +1,7 @@
 package com.mta.javacourse.service;
 
-import com.mta.javacourse.Stock;
 import com.mta.javacourse.model.Portfolio;
+import com.mta.javacourse.model.Stock;
 
 import java.util.Calendar;
 import java.util.Date;

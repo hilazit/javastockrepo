@@ -1,6 +1,5 @@
 package com.mta.javacourse.model;
 
-import com.mta.javacourse.Stock;
 
 public class Portfolio {
 
@@ -16,7 +15,25 @@ public class Portfolio {
 		this.portfolioSize = 0;
 		
 	}
+	/** copy c'tor of Portfolio class
+	 * @author HILA
+	 * @param portfolioToCopy
+	 */
+	
+	public Portfolio (Portfolio portfolioToCopy){
 		
+		this.setTitle(portfolioToCopy.getTitle());
+		this.setPortfolioSize(portfolioToCopy.getPortfolioSize());
+		
+		for (int i= 0; i<this.portfolioSize; i++ )	
+		{
+			Stock temp = new Stock (portfolioToCopy.getStock()[i]);
+			this.addStock (temp);
+			
+		}
+	}	
+		
+	
 	public void addStock (Stock stocks){
 		if(stocks != null && portfolioSize < MAX_PORTFOLIO_SIZE) {
 			this.stocks[portfolioSize] = stocks;
@@ -27,6 +44,32 @@ public class Portfolio {
 		
 	}
 	
+	/**
+	 * function for removing a specific stock from portfolio (according to it's symbol)
+	 * @author HILA
+	 */
+	
+	public void removeStock(String symbol) {
+		if (portfolioSize == 1 || symbol.equals(stocks[portfolioSize-1].getSymbol())){
+			/*in case the stocks array has 1 or symbol is last node in array*/
+			stocks[portfolioSize-1] = null;
+			portfolioSize--;
+			return;
+		}
+		for (int i = 0; i < portfolioSize; i++){
+			if (symbol == null){ //check validate input
+				return;
+			}
+			else if (symbol.equals(stocks[i].getSymbol()))
+			{
+				stocks[i] = stocks[portfolioSize - 1];
+				stocks[portfolioSize - 1] = null;
+				portfolioSize--;
+			}
+		}
+		return;
+	}
+
 	public String getHtmlString(){
 		String ret = new String( "<h1>" + getTitle() + "</h1>" );
 
@@ -38,7 +81,11 @@ public class Portfolio {
 			
 			}
 
-
+	/**
+	 * getters and setters
+	 * @author HILA
+	 */
+	
 	public Stock[] getStock()
 	{
 		return stocks;
@@ -73,9 +120,4 @@ public class Portfolio {
 	}
 	
 
-
-	
-
-	
-	
 }

@@ -1,4 +1,4 @@
-package com.mta.javacourse;
+package com.mta.javacourse.servlet;
 
 import javax.servlet.http.HttpServlet;
 
@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mta.javacourse.model.Stock;
 
 @SuppressWarnings({ "unused", "serial" })
 public class StockDetailsServlet extends HttpServlet  {
