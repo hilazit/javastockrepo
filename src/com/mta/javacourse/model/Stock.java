@@ -4,17 +4,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.mta.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
+
 public class Stock {
-	private final static int BUY = 0;		
-	private final static int SELL = 1;
-	private final static int REMOVE = 2;
-	private final static int HOLD = 3;
 	
+
 	private String symbol;
 	private float ask;
 	private float bid;
 	private Date date;
-	private int recommendation;
+	private  ALGO_RECOMMENDATION recommendation; 
 	private int stockQuantity;
 	
 	
@@ -23,7 +22,7 @@ public class Stock {
 		this.ask = ask;
 		this.bid = bid;
 		this.date = date;
-		this.recommendation = 0;
+		this.recommendation = ALGO_RECOMMENDATION.HOLD;
 		this.stockQuantity= 0;
 	}
 	/**
@@ -44,7 +43,9 @@ public class Stock {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		String dateStr = df.format(getDate());
 		
-		String result = new String("<b>Stock symbol is: </b>" +getSymbol()+", <b>ask: </b>"+getAsk() +", <b>Bid: </b>"+getBid()+", <b>Date: </b>"+dateStr);
+		String result = new String("<b>Stock symbol is: "
+				+ "</b>" +getSymbol()+", <b>ask: </b>"+getAsk() +", <b>Bid: </b>"+getBid()+
+				", <b>Date: </b>"+dateStr + ", <b>Quantity: </b>"+this.getStockQuantity() );
 		return result;
 	}
 	/**
@@ -52,11 +53,10 @@ public class Stock {
 	 * @author HILA
 	 */
 	
-	public int getRecommendation() {
+	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}
-
-	public void setRecommendation(int recommendation) {
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 		this.recommendation = recommendation;
 	}
 

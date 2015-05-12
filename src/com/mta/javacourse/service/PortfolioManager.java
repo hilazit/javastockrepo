@@ -9,22 +9,31 @@ import java.util.Date;
 public class PortfolioManager {
 	
 	public Portfolio getPortfolio() {
+		
 		Portfolio portfolio = new Portfolio();
+		portfolio.updateBalance(10000);
 		
 		Calendar cal = Calendar.getInstance();
-		cal.set(2014, 10, 15);
+		cal.set(2014, 11, 15);
 		
 		Date date1 = cal.getTime();
-		Stock stock1 = new Stock("PIH", (float)13.1 ,(float)12.4, date1);
+		Stock stock1 = new Stock("PIH",10F,8.5F,date1);
 		portfolio.addStock(stock1);
 		
 		Date date2 = cal.getTime();
-		Stock stock2 = new Stock("AAL", (float)5.78 ,(float)5.5, date2);
+		Stock stock2 = new Stock("AAL", 30F, 25.5F,date1);
 		portfolio.addStock(stock2);
 		
 		Date date3 = cal.getTime();
-		Stock stock3 = new Stock("CAAS", (float)32.2 ,(float)31.5, date3);
+		Stock stock3 = new Stock("CAAS", 20F, 15.5F,date3);
 		portfolio.addStock(stock3);
+		
+		portfolio.buyStock(stock1, 20);
+		portfolio.buyStock(stock2, 30);
+		portfolio.buyStock(stock3, 40);
+		
+		portfolio.sellStock("AAL", -1);
+		portfolio.removeStock("CAAS");
 		
 		return portfolio;
 
