@@ -1,98 +1,98 @@
 package com.mta.javacourse.model;
+import java.text.*;
+import java.util.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.algo.model.StockInterface;
 
 import com.mta.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 
-public class Stock {
-	
+public class Stock implements StockInterface{
+
 
 	private String symbol;
-	private float ask;
-	private float bid;
+	private float bid, ask;
 	private Date date;
-	private  ALGO_RECOMMENDATION recommendation; 
+	private ALGO_RECOMMENDATION recommendation;
 	private int stockQuantity;
-	
-	
-	public Stock(String symbol, float ask, float bid, Date date) {
-		this.symbol = symbol;
-		this.ask = ask;
-		this.bid = bid;
+	transient private SimpleDateFormat formDate = new SimpleDateFormat("dd/MM/yyyy");
+
+	/**
+	 * Constructor of Stock.
+	 */
+	public Stock (){
+		this.symbol = new String();
+		this.bid = 0;
+		this.ask = 0;
+		this.date = new Date();
+		this.recommendation = ALGO_RECOMMENDATION.HOLD;
+		this.stockQuantity = 0;				
+	}
+	/**
+	 * Constructor of Stock.
+	 */
+	public Stock (String newSymbol, float newBid, float newAsk, Date date){
+		this.symbol = newSymbol;
+		this.bid = newBid;
+		this.ask = newAsk;
 		this.date = date;
 		this.recommendation = ALGO_RECOMMENDATION.HOLD;
-		this.stockQuantity= 0;
+		this.stockQuantity = 0;				
 	}
+
 	/**
-	 * copy c'tor of stock class
-	 * @param stockToCopy
-	 * @author HILA
+	 * Copy Constructor of Stock.
 	 */
-	
-	public Stock (Stock stockToCopy){
-		this(stockToCopy.getSymbol(),stockToCopy.getBid(),stockToCopy.getAsk(),new Date(stockToCopy.getDate().getTime()));
-		this.recommendation = stockToCopy.getRecommendation();
-		this.stockQuantity = stockToCopy.getStockQuantity();
-		
+	public Stock (Stock oldStock)
+	{
+		this(oldStock.getSymbol(),oldStock.getBid(),oldStock.getAsk(),new Date(oldStock.getDate().getTime()));
+		this.recommendation = oldStock.getRecommendation();
+		this.stockQuantity = oldStock.getStockQuantity();
 	}
-	
+
+	/**
+	 * Rrturns string with stock's details
+	 */
 	public String getHtmlDescription(){
-		
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-		String dateStr = df.format(getDate());
-		
-		String result = new String("<b>Stock symbol is: "
-				+ "</b>" +getSymbol()+", <b>ask: </b>"+getAsk() +", <b>Bid: </b>"+getBid()+
-				", <b>Date: </b>"+dateStr + ", <b>Quantity: </b>"+this.getStockQuantity() );
-		return result;
+		return "<b>Stock symbol: </b>"+this.getSymbol()+" <b>Ask: </b>"+this.getAsk()+"<b> Bid: </b>"+this.getBid()+
+				"<b> Date: </b>"+this.formDate.format(this.getDate())+" <b>Quantity: </b>"+this.getStockQuantity();
 	}
-	/**
-	 * getters and setters
-	 * @author HILA
-	 */
-	
+
 	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}
-	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
-		this.recommendation = recommendation;
-	}
-
 	public int getStockQuantity() {
 		return stockQuantity;
 	}
-
 	public void setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
-
-
 	public String getSymbol() {
-		return symbol;
+		return this.symbol;
 	}
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	public float getAsk() {
-		return ask;
-	}
-	public void setAsk(float ask) {
-		this.ask = ask;
-	}
 	public float getBid() {
-		return bid;
+		return this.bid;
 	}
 	public void setBid(float bid) {
 		this.bid = bid;
 	}
-	public java.util.Date getDate() {
-		return date;
+	public float getAsk() {
+		return this.ask;
 	}
-	public void setDate(java.util.Date date) {
+	public void setAsk(float ask) {
+		this.ask = ask;
+	}
+	public Date getDate() {
+		return this.date;
+	}
+	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+	public void setRecommendation(ALGO_RECOMMENDATION valueOf) {
+		this.recommendation = valueOf;
+
+	}
 
 }
